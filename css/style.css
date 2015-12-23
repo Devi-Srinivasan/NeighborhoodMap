@@ -20,17 +20,7 @@ html {
 	margin: 5px 0 5px 0;
 }
  
-.menu-list {
-	list-style-type: none;
-	width: auto;
-	background-color: #8c8c8c;
-	color: white;
-	border-radius: 5px;
-	margin-bottom: 4px;
-	text-align: center;
-}
-
- .labels {
+.labels {
 	font-family: "sans serif";
 	font-size: 16px !important;
 	font-weight: bold !important;
@@ -40,23 +30,7 @@ html {
 	float: left;
 	height: 120px;
 	width: auto;
+	position: fixed;
  }
- 
-@media (max-width: 500px) {
-	 .nav-menu {
- 		margin: -520px 0 0 0;
-	 }
-}
-
-@media (max-width: 1360px) {
-	 .nav-menu {
-		 margin: -570px 0 0 0;
-	 }
- }
-
-@media (min-width: 1361px) {
-	 .nav-menu {
-		 margin: -660px 0 0 0;
-	 }
  } 
  

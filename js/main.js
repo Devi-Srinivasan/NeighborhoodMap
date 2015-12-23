@@ -190,7 +190,6 @@ var viewModel = function(){
 			dataType: 'jsonp',
 			success: function(results) {
 				self.showNavMenu(false);//hide the navmenu that has location and filter by
-				console.log("Results: "+JSON.stringify(results))
 				//style and display the infowindow			
 				var name = '<h4 style="background:#853330;color:#ffffff">'+results.businesses[0].name+'</h4>';
  				var rating = '<div><img src="'+results.businesses[0].rating_img_url+'"></div>';	
@@ -218,6 +217,7 @@ ko.bindingHandlers.autoc = {
 			source: viewModel.autoCompleteSource,
 			select: function (event, ui) {
 				viewModel.showSelectedMarker(ui.item.value);
+				viewModel.filterPlaces(ui.item.value);
 			}
 		});
 	}

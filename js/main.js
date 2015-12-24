@@ -20,7 +20,7 @@ var viewModel = function(){
 		self.filterPlaceArray([]);
  		autoPlaceOfInt.forEach(function(place){
 			var foundMarker = self.findMarker(place.value);
- 			if (place.value.toLowerCase().search(placeName.toLowerCase())>=0){
+ 			if (place.label.toLowerCase().search(placeName.toLowerCase())>=0){
 				self.filterPlaceArray().push(place);
 				foundMarker.setMap(map);
  			} else {
@@ -33,20 +33,20 @@ var viewModel = function(){
  		self.filterPlaceArray(self.filterPlaceArray());
 	};
 
-	this.findMarker = function(placeName) {
+	this.findMarker = function(placeId) {
 		var foundMarker;
-		markerArray.forEach(function(marker){
-			if(marker.getTitle().localeCompare(placeName) === 0){
+ 		markerArray.forEach(function(marker){
+			if(marker.id.localeCompare(placeId) === 0){
 				foundMarker=marker;
- 			}
-		});
+   			}
+		});		
 		return foundMarker;
- 	};
+  	};
 
 //Display marker based on input box value
-	this.showSelectedMarker = function(placeName) {
+	this.showSelectedMarker = function(placeId) {
 		markerArray.forEach(function(marker){
-			if(marker.getTitle().localeCompare(placeName) === 0){
+			if(marker.id.localeCompare(placeId) === 0){
 				marker.setMap(map);
 			} else {
 				marker.setMap(null);
@@ -55,9 +55,9 @@ var viewModel = function(){
  	};
 
 //Animate marker based on select list click
-    this.animateMarker = function(placeName){
+    this.animateMarker = function(placeId){
  		markerArray.forEach(function(marker){
- 			if(marker.getTitle().localeCompare(placeName) === 0){
+ 			if(marker.id.localeCompare(placeId) === 0){
 				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
 				marker.setAnimation(google.maps.Animation.BOUNCE);
   			} else{
@@ -76,8 +76,7 @@ var viewModel = function(){
 			center: coordinates,
 			zoom: 15
 		});
-
-		infowindow = new google.maps.InfoWindow({
+ 		infowindow = new google.maps.InfoWindow({
 			maxWidth: 300
 		});
 	};
@@ -102,7 +101,7 @@ var viewModel = function(){
 		self.placeOfInt = results.slice();
 
 		results.forEach(function(place){
-			autoPlaceOfInt.push({value:place.name, label:place.name, autoPlace:place});
+			autoPlaceOfInt.push({value:place.id, label:place.name, autoPlace:place});
 		});
 		self.filterPlaceArray(autoPlaceOfInt);
 	}
@@ -112,6 +111,7 @@ var viewModel = function(){
 		var marker = new google.maps.Marker({
 			map: map,
 			title: place.name,
+			id : place.id,
 			draggable: true,
  			animation: google.maps.Animation.DROP,
 			position: place.geometry.location,
@@ -127,7 +127,7 @@ var viewModel = function(){
  			infowindow.setContent(self.yelpApiList(place.name));
    			infowindow.open(map, this);
    		});
-		google.maps.event.addListener(infowindow,'closeclick',function() {
+ 		google.maps.event.addListener(infowindow,'closeclick',function() {
 			previousMarker = null;
 			self.showNavMenu(true);//show the nav menu that has location and filter by
  			marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
@@ -204,8 +204,10 @@ ko.bindingHandlers.autoc = {
 			autoFocus: true,
 			source: viewModel.autoCompleteSource,
 			select: function (event, ui) {
+				event.preventDefault();
+				viewModel.location(ui.item.label);
 				viewModel.showSelectedMarker(ui.item.value);
-			},
+ 			},
 			focus: function(event,ui){
 				viewModel.animateMarker(ui.item.value);
 			}

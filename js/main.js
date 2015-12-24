@@ -60,7 +60,8 @@ var viewModel = function(){
  			if(marker.id.localeCompare(placeId) === 0){
 				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
 				marker.setAnimation(google.maps.Animation.BOUNCE);
-  			} else{
+				previousMarker = marker;
+   			} else{
 				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
 				marker.setAnimation(null);
    			}

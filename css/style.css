@@ -16,10 +16,7 @@ html {
 	margin: 0 0 5px 0;
  	padding: 5px 0 0 5px;
 }
-.select-menu {
-	margin: 5px 0 5px 0;
-}
- 
+
 .labels {
 	font-family: "sans serif";
 	font-size: 16px !important;
@@ -28,9 +25,17 @@ html {
 .nav-menu {
  	background-color: #d9d9d9;
 	float: left;
-	height: 120px;
+	height: 70px;
 	width: auto;
 	position: fixed;
- }
- } 
+}
+
+@media (max-width:800px){
+	.ui-autocomplete {
+		max-height: 150px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	} 
+}
+ 
  

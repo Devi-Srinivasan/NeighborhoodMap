@@ -205,7 +205,6 @@ ko.bindingHandlers.autoc = {
 			source: viewModel.autoCompleteSource,
 			select: function (event, ui) {
 				viewModel.showSelectedMarker(ui.item.value);
-				viewModel.filterPlaces(ui.item.value);				
 			},
 			focus: function(event,ui){
 				viewModel.animateMarker(ui.item.value);

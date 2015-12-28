@@ -177,7 +177,7 @@ var viewModel = function(){
 			jsonCallback: 'cb',
 			cache: true,
 			dataType: 'jsonp',
-			timeout: 2000,
+			timeout: 2000,//Added timeout here
 			success: function(results) {
 				self.showNavMenu(false);//hide the navmenu that has location and filter by
  				//style and display the infowindow

@@ -126,6 +126,7 @@ var viewModel = function(){
 			previousMarker = this;
 			infowindow.close();
  			infowindow.setContent(self.yelpApiList(place.name));
+			map.panTo(position.latLng);
    			infowindow.open(map, this);
    		});
  		google.maps.event.addListener(infowindow,'closeclick',function() {

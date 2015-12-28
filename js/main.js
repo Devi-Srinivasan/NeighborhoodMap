@@ -108,7 +108,6 @@ var viewModel = function(){
 	}
 	};
 	this.createMarker = function(place) {
-		var placeLoc = place.geometry.location;
 		var marker = new google.maps.Marker({
 			map: map,
 			title: place.name,
